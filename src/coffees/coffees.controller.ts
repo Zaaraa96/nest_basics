@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -24,6 +24,7 @@ export class CoffeesController {
   findOne(@Param('id') id: string) {
     return this.coffeesService.findOne(+id);
   }
+  
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
@@ -33,5 +34,12 @@ export class CoffeesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.coffeesService.remove(+id);
+  }
+
+  
+  @Put(':id/recommend')
+  async recommend(@Param('id') id: string) {
+    const coffee= await this.coffeesService.findOne(+id);
+    return this.coffeesService.recommendCoffee(coffee);
   }
 }

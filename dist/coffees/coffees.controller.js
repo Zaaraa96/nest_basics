@@ -38,6 +38,10 @@ let CoffeesController = class CoffeesController {
     remove(id) {
         return this.coffeesService.remove(+id);
     }
+    async recommend(id) {
+        const coffee = await this.coffeesService.findOne(+id);
+        return this.coffeesService.recommendCoffee(coffee);
+    }
 };
 exports.CoffeesController = CoffeesController;
 __decorate([
@@ -76,6 +80,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CoffeesController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Put)(':id/recommend'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CoffeesController.prototype, "recommend", null);
 exports.CoffeesController = CoffeesController = __decorate([
     (0, swagger_1.ApiTags)('coffees'),
     (0, common_1.Controller)('coffees'),

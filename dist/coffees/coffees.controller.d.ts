@@ -10,4 +10,5 @@ export declare class CoffeesController {
     findOne(id: string): Promise<import("./entities/coffee.entity").Coffee>;
     update(id: string, updateCoffeeDto: UpdateCoffeeDto): Promise<import("./entities/coffee.entity").Coffee>;
     remove(id: string): Promise<import("./entities/coffee.entity").Coffee>;
+    recommend(id: string): Promise<void>;
 }

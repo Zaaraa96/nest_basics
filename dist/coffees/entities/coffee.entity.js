@@ -28,6 +28,10 @@ __decorate([
     __metadata("design:type", String)
 ], Coffee.prototype, "brand", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    __metadata("design:type", Number)
+], Coffee.prototype, "recommendations", void 0);
+__decorate([
     (0, typeorm_1.JoinTable)(),
     (0, typeorm_1.ManyToMany)(type => flavour_entity_1.Flavour, (flavour) => flavour.coffees, {
         cascade: true,

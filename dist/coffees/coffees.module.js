@@ -13,13 +13,14 @@ const coffees_controller_1 = require("./coffees.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const coffee_entity_1 = require("./entities/coffee.entity");
 const flavour_entity_1 = require("./entities/flavour.entity");
+const event_entity_1 = require("../events/entities/event.entity");
 let CoffeesModule = class CoffeesModule {
 };
 exports.CoffeesModule = CoffeesModule;
 exports.CoffeesModule = CoffeesModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([coffee_entity_1.Coffee, flavour_entity_1.Flavour])
+            typeorm_1.TypeOrmModule.forFeature([coffee_entity_1.Coffee, flavour_entity_1.Flavour, event_entity_1.Event])
         ],
         controllers: [coffees_controller_1.CoffeesController],
         providers: [coffees_service_1.CoffeesService],
