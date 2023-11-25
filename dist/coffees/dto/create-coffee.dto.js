@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCoffeeDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
 class CreateCoffeeDto {
 }
 exports.CreateCoffeeDto = CreateCoffeeDto;
@@ -19,6 +20,7 @@ __decorate([
         required: true,
         example: 'moka'
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCoffeeDto.prototype, "name", void 0);
 __decorate([
@@ -26,13 +28,15 @@ __decorate([
         required: true,
         example: 'starBux'
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCoffeeDto.prototype, "brand", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         required: true,
-        example: ['chocolate']
+        example: ['chocolate', 'caramel']
     }),
+    (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], CreateCoffeeDto.prototype, "flavors", void 0);
 //# sourceMappingURL=create-coffee.dto.js.map
