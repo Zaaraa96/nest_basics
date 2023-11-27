@@ -15,8 +15,7 @@ export class PaginationQueryDto {
     @IsPositive()
     @Type(()=> Number)
     @ApiProperty({
-        required: false,
-        example: 0
+        required: false
     })
     offset: number;
 }
