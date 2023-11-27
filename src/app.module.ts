@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from "@nestjs/config";
 import * as Joi from '@hapi/joi';
 import { APP_PIPE } from '@nestjs/core';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -34,7 +35,8 @@ import { APP_PIPE } from '@nestjs/core';
       synchronize: true
     }
   ),
-  DatabaseModule
+  DatabaseModule,
+  CommonModule
   ],
   controllers: [AppController],
   providers: [AppService,
