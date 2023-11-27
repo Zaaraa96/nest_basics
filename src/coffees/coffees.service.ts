@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { DataSource, Repository } from 'typeorm';
@@ -7,16 +7,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Flavour } from './entities/flavour.entity';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from '../events/entities/event.entity';
+import { ConfigService } from '@nestjs/config';
 
-@Injectable()
 export class CoffeesService {
 
   constructor(
     @InjectRepository(Coffee) private readonly coffeeRepo: Repository<Coffee>,
     @InjectRepository(Flavour) private readonly flavorRepo: Repository<Flavour>,
-    private readonly connection: DataSource 
-    
-    ){}
+    private readonly connection: DataSource, 
+    private readonly configService: ConfigService
+    ){
+      const databaseHost = this.configService.get<string>('DATABASE_HOST');
+      console.log(databaseHost);
+      
+    }
 
   async create(createCoffeeDto: CreateCoffeeDto) {
     const flavors = await Promise.all(
@@ -47,9 +51,11 @@ export class CoffeesService {
   }
 
   async update(id: number, updateCoffeeDto: UpdateCoffeeDto) {
-    const flavors = await Promise.all(
+    const flavors = 
+    updateCoffeeDto.flavors !=null?
+    await Promise.all(
       updateCoffeeDto.flavors.map(name => this.preloadFlavourByName(name)),
-    );
+    ): [];
     const coffee = await this.coffeeRepo.preload({
       id: id,
        ...updateCoffeeDto,
