@@ -18,5 +18,5 @@ export class PaginationQueryDto {
         required: false,
         example: 0
     })
-    offset: number = 0;
+    offset: number;
 }
